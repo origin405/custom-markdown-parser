@@ -1,0 +1,20 @@
+{
+  "name": "markdown",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "A custom markdown parser for chatgpt api res chunks.",
+  "main": "app.js",
+  "scripts": {
+    "test": "mocha --experimental-modules --exit"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "jest": "^29.7.0",
+    "jsdom": "^24.0.0"
+  },
+  "devDependencies": {
+    "chai": "^5.1.0",
+    "mocha": "^10.3.0"
+  }
+}

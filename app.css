@@ -1,0 +1,115 @@
+/* Bold text, typically rendered with <strong> */
+strong {
+    font-weight: bold;
+    white-space: pre-wrap; /* Preserves whitespace and wraps text */
+
+}
+
+/* Italic text, typically rendered with <em> */
+em {
+    font-style: italic;
+    white-space: pre-wrap; /* Preserves whitespace and wraps text */
+
+}
+
+/* Bold and Italic text, which we'll assign a specific class */
+.bold-italic {
+    font-weight: bold;
+    font-style: italic;
+    white-space: pre-wrap; /* Preserves whitespace and wraps text */
+
+}
+
+/* Strikethrough text, typically rendered with <del> */
+del {
+    text-decoration: line-through;
+    white-space: pre-wrap; /* Preserves whitespace and wraps text */
+
+}
+
+/* Inline code, typically rendered with <code> */
+code {
+    font-family: monospace;
+    padding: 2px 4px;
+    border-radius: 4px;
+    white-space: pre-wrap; /* Preserves whitespace and wraps text */
+
+}
+code::before,
+code::after {
+  content: '`'; /* Backtick character */
+}
+
+/* Blockquotes, typically rendered with <blockquote> */
+blockquote {
+    margin-left: 20px;
+    padding-left: 15px;
+    border-left: 5px solid #ccc;
+}
+
+/* Unordered list, typically rendered with <ul> */
+ul {
+    list-style-type: disc;
+    margin-left: 20px;
+    color: blue;
+
+}
+
+/* Ordered list, typically rendered with <ol> */
+ol {
+    list-style-type: decimal;
+    margin-left: 20px;
+    color: blue;
+
+}
+
+/* List items, typically rendered with <li> */
+li {
+    margin-bottom: 0.5em;
+    margin-left: 0.5em;
+    color: blue;
+
+}
+
+/* Links, typically rendered with <a> */
+a {
+    color: blue;
+    text-decoration: underline;
+}
+
+/* Headers, typically rendered with <h1> to <h6> */
+h1 { font-size: 2em; margin-bottom: 0.5em; }
+h2 { font-size: 1.5em; margin-bottom: 0.75em; }
+h3 { font-size: 1.17em; margin-bottom: 1em; }
+h4 { font-size: 1em; margin-bottom: 1.33em; }
+h5 { font-size: 0.83em; margin-bottom: 1.67em; }
+h6 { font-size: 0.67em; margin-bottom: 2.33em; }
+
+
+.bold-italic {
+    font-style: italic;
+    white-space: pre-wrap; /* Preserves whitespace and wraps text */
+
+}
+
+/* Chat container styling */
+#chatContainer {
+    width: 80%; /* Adjust the width as needed */
+    max-width: 600px; /* Maximum width of the container */
+    margin: 20px auto; /* Centers the container with top and bottom margin of 20px */
+    padding: 20px; /* Padding inside the container */
+    border: 1px solid #ccc; /* Border around the container */
+    border-radius: 5px; /* Rounded corners */
+    background-color: #f9f9f9; /* Light background color */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for 3D effect */
+    overflow: auto; /* Ensures the content is scrollable if it overflows */
+  }
+  
+  /* Style for paragraphs inside the chat container */
+  #chatContainer p {
+    margin: 10px 0; /* Spacing between paragraphs */
+    line-height: 1.5; /* Line height for readability */
+    font-size: 16px; /* Font size for the chat text */
+    white-space: pre-wrap; /* Preserves whitespace and wraps text */
+  }
+  
