@@ -103,13 +103,38 @@ h6 { font-size: 0.67em; margin-bottom: 2.33em; }
     background-color: #f9f9f9; /* Light background color */
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for 3D effect */
     overflow: auto; /* Ensures the content is scrollable if it overflows */
-  }
+}
   
-  /* Style for paragraphs inside the chat container */
-  #chatContainer p {
-    margin: 10px 0; /* Spacing between paragraphs */
-    line-height: 1.5; /* Line height for readability */
-    font-size: 16px; /* Font size for the chat text */
+/* Style for paragraphs inside the chat container */
+#chatContainer p {
+  margin: 10px 0; /* Spacing between paragraphs */
+  line-height: 1.5; /* Line height for readability */
+  font-size: 16px; /* Font size for the chat text */
+  white-space: pre-wrap; /* Preserves whitespace and wraps text */
+}
+
+
+.code-block {
+  border: 1px solid #ddd; /* Light grey border */
+  background-color: #f6f8fa; /* Light grey background */
+  border-radius: 6px; /* Rounded corners */
+  margin: 10px 0; /* Spacing above and below */
+  font-family: 'Courier New', monospace; /* Monospace font */
+}
+
+.code-header {
+    background-color: #e1e4e8; /* Slightly darker grey background */
+    padding: 6px 10px; /* Padding inside the header */
+    border-bottom: 1px solid #ddd; /* Border between header and body */
+    border-top-left-radius: 6px; /* Rounded top left corner */
+    border-top-right-radius: 6px; /* Rounded top right corner */
+    color: #333; /* Dark text for contrast */
+    font-size: 0.9em; /* Slightly smaller font size */
+}
+
+.code-body {
+    padding: 10px; /* Padding inside the body */
+    overflow-x: auto; /* Horizontal scrolling if code is wide */
     white-space: pre-wrap; /* Preserves whitespace and wraps text */
-  }
-  
+
+}

@@ -633,169 +633,6 @@ const paragraphRawChunks2 = {
     },
   ],
 };
-const nestedParagraphEmphasisChunk = {
-  chunks: [
-    {
-      content: "",
-    },
-    {
-      content: "Yes",
-    },
-    {
-      content: ",",
-    },
-    {
-      content: " it",
-    },
-    {
-      content: " is",
-    },
-    {
-      content: "**",
-    },
-    {
-      content: " possible",
-    },
-    {
-      content: " to",
-    },
-    {
-      content: " have",
-    },
-    {
-      content: " nested",
-    },
-    {
-      content: "**",
-    },
-    {
-      content: " emphasis",
-    },
-    {
-      content: " markdown",
-    },
-    {
-      content: " in",
-    },
-    {
-      content: " a",
-    },
-    {
-      content: " paragraph",
-    },
-    {
-      content: ".",
-    },
-    {
-      content: " Here",
-    },
-    {
-      content: " is",
-    },
-    {
-      content: " an",
-    },
-    {
-      content: " example",
-    },
-    {
-      content: " sentence",
-    },
-    {
-      content: ":\n\n",
-    },
-    {
-      content: "*",
-    },
-    {
-      content: "In",
-    },
-    {
-      content: " the",
-    },
-    {
-      content: " **",
-    },
-    {
-      content: "world",
-    },
-    {
-      content: "**",
-    },
-    {
-      content: " of",
-    },
-    {
-      content: " coding",
-    },
-    {
-      content: ",",
-    },
-    {
-      content: " mastering",
-    },
-    {
-      content: " _",
-    },
-    {
-      content: "multiple",
-    },
-    {
-      content: "_",
-    },
-    {
-      content: " programming",
-    },
-    {
-      content: " languages",
-    },
-    {
-      content: " can",
-    },
-    {
-      content: " open",
-    },
-    {
-      content: " up",
-    },
-    {
-      content: " a",
-    },
-    {
-      content: " realm",
-    },
-    {
-      content: " of",
-    },
-    {
-      content: " **",
-    },
-    {
-      content: "_",
-    },
-    {
-      content: "end",
-    },
-    {
-      content: "less",
-    },
-    {
-      content: " possibilities",
-    },
-    {
-      content: "_",
-    },
-    {
-      content: "**",
-    },
-    {
-      content: ".*",
-    },
-    {
-      content: "",
-    },
-  ],
-};
 
 const ol5 = {
   chunks: [
@@ -3854,6 +3691,449 @@ const ul2_ul2 = {
     },
   ],
 }; //clear
+
+const h1Toh6 = {
+  chunks: [
+    {
+      content: "",
+    },
+    {
+      content: "#",
+    },
+    {
+      content: " Header",
+    },
+    {
+      content: " ",
+    },
+    {
+      content: "1",
+    },
+    {
+      content: " **",
+    },
+    {
+      content: "ad",
+    },
+    {
+      content: "ip",
+    },
+    {
+      content: "iscing",
+    },
+    {
+      content: "**",
+    },
+    {
+      content: " elit",
+    },
+    {
+      content: ".",
+    },
+    {
+      content: " Sed",
+    },
+    {
+      content: " *",
+    },
+    {
+      content: "vit",
+    },
+    {
+      content: "ae",
+    },
+    {
+      content: "*",
+    },
+    {
+      content: " maur",
+    },
+    {
+      content: "\n",
+    },
+    {
+      content: "##",
+    },
+    {
+      content: " Header",
+    },
+    {
+      content: " ",
+    },
+    {
+      content: "2",
+    },
+    {
+      content: "\n",
+    },
+    {
+      content: "###",
+    },
+    {
+      content: " Header",
+    },
+    {
+      content: " ",
+    },
+    {
+      content: "3",
+    },
+    {
+      content: "\n",
+    },
+    {
+      content: "####",
+    },
+    {
+      content: " Header",
+    },
+    {
+      content: " ",
+    },
+    {
+      content: "4",
+    },
+    {
+      content: "\n",
+    },
+    {
+      content: "#####",
+    },
+    {
+      content: " Header",
+    },
+    {
+      content: " ",
+    },
+    {
+      content: "5",
+    },
+    {
+      content: "\n",
+    },
+    {
+      content: "######",
+    },
+    {
+      content: " Header",
+    },
+    {
+      content: " ",
+    },
+    {
+      content: "6",
+    },
+    {
+      content: "",
+    },
+  ],
+};
+const nestedParagraphEmphasisChunk = {
+  chunks: [
+    {
+      content: "",
+    },
+    {
+      content: "Yes",
+    },
+    {
+      content: ",",
+    },
+    {
+      content: " it",
+    },
+    {
+      content: " is",
+    },
+    {
+      content: "**",
+    },
+    {
+      content: "possible",
+    },
+    {
+      content: " to",
+    },
+    {
+      content: " have",
+    },
+    {
+      content: " nested",
+    },
+    {
+      content: "**",
+    },
+    {
+      content: " emphasis",
+    },
+    {
+      content: " markdown",
+    },
+    {
+      content: " in",
+    },
+    {
+      content: " a",
+    },
+    {
+      content: " paragraph",
+    },
+    {
+      content: ".",
+    },
+    {
+      content: " Here",
+    },
+    {
+      content: " is",
+    },
+    {
+      content: " an",
+    },
+    {
+      content: " example",
+    },
+    {
+      content: " sentence",
+    },
+    {
+      content: ":\n\n",
+    },
+    {
+      content: "*",
+    },
+    {
+      content: "In",
+    },
+    {
+      content: " the",
+    },
+    {
+      content: " **",
+    },
+    {
+      content: "world",
+    },
+    {
+      content: "**",
+    },
+    {
+      content: " of",
+    },
+    {
+      content: " coding",
+    },
+    {
+      content: ",",
+    },
+    {
+      content: " mastering",
+    },
+    {
+      content: " _",
+    },
+    {
+      content: "multiple",
+    },
+    {
+      content: "_",
+    },
+    {
+      content: " programming",
+    },
+    {
+      content: " languages",
+    },
+    {
+      content: " can",
+    },
+    {
+      content: " open",
+    },
+    {
+      content: " up",
+    },
+    {
+      content: " a",
+    },
+    {
+      content: " realm",
+    },
+    {
+      content: " of",
+    },
+    {
+      content: " **",
+    },
+    {
+      content: "_",
+    },
+    {
+      content: "end",
+    },
+    {
+      content: "less",
+    },
+    {
+      content: " possibilities",
+    },
+    {
+      content: "_",
+    },
+    {
+      content: "**",
+    },
+    {
+      content: ".*",
+    },
+    {
+      content: "",
+    },
+  ],
+};
+
+const codeblock1 = {
+  chunks: [
+    {
+      content: "",
+    },
+    {
+      content: "Sure",
+    },
+    {
+      content: ",",
+    },
+    {
+      content: " here",
+    },
+    {
+      content: " is",
+    },
+    {
+      content: " an",
+    },
+    {
+      content: " example",
+    },
+    {
+      content: " of",
+    },
+    {
+      content: " a",
+    },
+    {
+      content: " code",
+    },
+    {
+      content: " block",
+    },
+    {
+      content: " with",
+    },
+    {
+      content: " some",
+    },
+    {
+      content: " sample",
+    },
+    {
+      content: " code",
+    },
+    {
+      content: " in",
+    },
+    {
+      content: " it",
+    },
+    {
+      content: ":\n\n",
+    },
+    {
+      content: "```",
+    },
+    {
+      content: "python",
+    },
+    {
+      content: "\n",
+    },
+    {
+      content: "def",
+    },
+    {
+      content: " greet",
+    },
+    {
+      content: "(name",
+    },
+    {
+      content: "):\n",
+    },
+    {
+      content: "   ",
+    },
+    {
+      content: " print",
+    },
+    {
+      content: '("',
+    },
+    {
+      content: "Hello",
+    },
+    {
+      content: ",",
+    },
+    {
+      content: ' "',
+    },
+    {
+      content: " +",
+    },
+    {
+      content: " name",
+    },
+    {
+      content: ")\n\n",
+    },
+    {
+      content: "g",
+    },
+    {
+      content: "reet",
+    },
+    {
+      content: '("',
+    },
+    {
+      content: "Alice",
+    },
+    {
+      content: '")\n',
+    },
+    {
+      content: "g",
+    },
+    {
+      content: "reet",
+    },
+    {
+      content: '("',
+    },
+    {
+      content: "Bob",
+    },
+    {
+      content: '")\n',
+    },
+    {
+      content: "```",
+    },
+    {
+      content: "",
+    },
+  ],
+};
 //Naive testing stuff
 // let testResultObject = {
 //   expectedHtmlOutputTestResult: "",
@@ -3862,13 +4142,13 @@ const ul2_ul2 = {
 async function simulateApiResponse() {
   const chatDivElement = document.getElementById("chatContainer");
 
-  let paragraphChunks = extractContentFromChunks(nestedParagraphEmphasisChunk); //REPLACE TEST CHUNKS HERE
+  let paragraphChunks = extractContentFromChunks(ol2__ol2_ul2); //REPLACE TEST CHUNKS HERE
   let mainParser = new MainParser(document, chatDivElement);
   for (let chunk of paragraphChunks) {
     await new Promise((resolve) => setTimeout(resolve, Math.random() * 10)); // Random delay between 0-1000 milliseconds
     mainParser.parseChunk(chunk);
   }
-  let paragraphChunks1 = extractContentFromChunks(ol5); //REPLACE TEST CHUNKS HERE
+  let paragraphChunks1 = extractContentFromChunks(ul_2ol_2ul); //REPLACE TEST CHUNKS HERE
   let mainParser1 = new MainParser(document, chatDivElement);
   for (let chunk of paragraphChunks1) {
     await new Promise((resolve) => setTimeout(resolve, Math.random() * 10)); // Random delay between 0-1000 milliseconds

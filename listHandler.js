@@ -1,3 +1,297 @@
+// import { EmphasisHandler } from "./emphasisHandler.js";
+
+// class ListHandler {
+//   constructor(document, chatDivElement, doneCallback, mainStack) {
+//     this.document = document;
+//     this.chatDivElement = chatDivElement;
+//     this.mainStack = mainStack;
+//     this.doneCallback = doneCallback;
+
+//     this.listRegex = /^(1|[-*+])$/;
+//     this.orderedListRegex = /(\S)?\s*1$/;
+//     this.unorderedListRegex = /(\s*)-$/;
+//     this.whitespaceRegex = /^\s{1,}$/;
+//     this.newListRegex = /(\S\s*)?\n/;
+//     this.newParagraphRegex = /(\S\s*)?\n\n/;
+
+//     this.listStack = [{ element: { tagName: "DUMMY" }, spacing: 0 }];
+//     this.activeLI = null;
+//     this.isAwaitingDot = false;
+//     this.numberBuffer = "";
+//     this.nestedSpaceCount = null;
+//     this.isAwaitingSpaces = false;
+//     this.emphasisHandlerActive = false;
+
+//     this.emphasisHandler = new EmphasisHandler(
+//       this.document,
+//       this.chatDivElement,
+//       () => this.deactivateEmphasisHandler(),
+//       this.mainStack,
+//       this.activeLI,
+//       this.listStack
+//     );
+//   }
+
+//   matches(chunk) {
+//     return this.listRegex.test(chunk);
+//   }
+
+//   handle(chunk) {
+//     if (this.newListRegex.test(chunk)) {
+//       this.resetListState();
+//       return;
+//     }
+
+//     if (this.isAwaitingSpaces) {
+//       if (this.whitespaceRegex.test(chunk)) {
+//         this.nestedSpaceCount = chunk.length;
+//         this.isAwaitingSpaces = false;
+//         return;
+//       }
+//       this.isAwaitingSpaces = false;
+//     }
+
+//     if (chunk === "1" && this.isParentParagraph()) {
+//       this.appendChunkToParent(chunk);
+//       return;
+//     }
+
+//     if (this.newParagraphRegex.test(chunk)) {
+//       this.handleNewParagraph(chunk);
+//       return;
+//     }
+
+//     if (this.emphasisHandlerActive) {
+//       this.emphasisHandler.handle(chunk);
+//       return;
+//     } else if (this.emphasisHandler.matches(chunk)) {
+//       this.activateEmphasisHandler();
+//       this.emphasisHandler.handle(chunk);
+//       return;
+//     }
+
+//     if (this.isAwaitingDot) {
+//       this.handleAwaitingDot(chunk);
+//     } else {
+//       if (this.activeLI) {
+//         this.appendChunkToListItem(chunk);
+//       } else if (this.isChunkNumber(chunk)) {
+//         this.prepareForOrderedList(chunk);
+//       } else if (this.unorderedListRegex.test(chunk)) {
+//         this.handleUnorderedList(chunk);
+//       }
+//     }
+//   }
+
+//   resetListState() {
+//     this.nestedSpaceCount = null;
+//     this.activeLI = null;
+//     this.isAwaitingSpaces = true;
+//   }
+
+//   isParentParagraph() {
+//     return this.mainStack.at(-2).tagName === "P";
+//   }
+
+//   appendChunkToParent(chunk) {
+//     this.mainStack.at(-2).innerHTML += chunk;
+//     this.doneCallback();
+//   }
+
+//   handleNewParagraph(chunk) {
+//     const result = this.newParagraphRegex.exec(chunk);
+//     if (result[1]) {
+//       this.activeLI.innerHTML += result[1];
+//     }
+//     this.doneCallback();
+//   }
+
+//   activateEmphasisHandler() {
+//     this.emphasisHandlerActive = true;
+//   }
+
+//   deactivateEmphasisHandlerdeactivateEmphasisHandler() {
+//     this.emphasisHandlerActive = false;
+//   }
+
+//   handleAwaitingDot(chunk) {
+//     if (chunk === ".") {
+//       this.handleOrderedList();
+//     } else {
+//       if (this.activeLI) {
+//         if (this.newListRegex.test(chunk)) {
+//           this.activeLI.innerHTML += this.numberBuffer;
+//           this.resetAwaitingDot();
+//           return;
+//         }
+//         this.activeLI.innerHTML += this.activeLI.innerHTML + chunk;
+//         this.resetAwaitingDot();
+//       } else {
+//         throw new Error("Unexpected chunk while awaiting dot: " + chunk);
+//       }
+//     }
+//   }
+
+//   resetAwaitingDot() {
+//     this.activeLI = null;
+//     this.isAwaitingDot = false;
+//   }
+
+//   appendChunkToListItem(chunk) {
+//     this.activeLI.innerHTML += chunk;
+//   }
+
+//   prepareForOrderedList(chunk) {
+//     this.isAwaitingDot = true;
+//     this.numberBuffer = chunk;
+//   }
+
+//   handleOrderedList() {
+//     if (this.numberBuffer === "1") {
+//       this.createNewOrderedList();
+//     } else {
+//       this.appendToExistingOrderedList();
+//     }
+//   }
+
+//   createNestedUnorderedList() {
+//     const ulElement = this.document.createElement("ul");
+//     if (this.getCurrentListItem()) {
+//       this.getCurrentListItem().appendChild(ulElement);
+//       this.updateListStack(ulElement);
+//       this.createNewListItem(ulElement);
+//     } else {
+//       throw new Error("No active list item to nest the unordered list");
+//     }
+//   }
+
+//   appendToExistingOrderedList() {
+//     if (this.isCurrentLevel()) {
+//       this.createNewListItem(this.getCurrentList());
+//     } else {
+//       const foundIndex = this.findMatchingNestedLevel();
+//       if (foundIndex !== -1) {
+//         this.updateListStackToLevel(foundIndex);
+//         this.createNewListItem(this.getCurrentList());
+//       } else {
+//         throw new Error("No matching spacing found for ordered list");
+//       }
+//     }
+//   }
+
+//   handleUnorderedList(chunk) {
+//     if (this.isFirstListItem()) {
+//       this.createNewUnorderedList();
+//     } else {
+//       this.appendToExistingUnorderedList();
+//     }
+//   }
+
+//   isFirstListItem() {
+//     return this.listStack.at(-1).element.tagName === "DUMMY";
+//   }
+
+//   createNewUnorderedList() {
+//     const ulElement = this.document.createElement("ul");
+//     this.chatDivElement.appendChild(ulElement);
+//     this.updateListStack(ulElement);
+//     this.createNewListItem(ulElement);
+//   }
+
+//   appendToExistingUnorderedList() {
+//     if (this.nestedSpaceCount === null) {
+//       this.createNewListItem(this.getCurrentList());
+//     } else if (this.isCurrentLevel()) {
+//       this.createNewListItem(this.getCurrentList());
+//     } else if (this.isNestedLevel()) {
+//       this.createNestedUnorderedList();
+//     } else {
+//       this.appendToHigherLevelUnorderedList();
+//     }
+//   }
+
+//   createNestedUnorderedList() {
+//     const ulElement = this.document.createElement("ul");
+//     this.getCurrentListItem().appendChild(ulElement);
+//     this.updateListStack(ulElement);
+//     this.createNewListItem(ulElement);
+//   }
+
+//   appendToHigherLevelUnorderedList() {
+//     const foundIndex = this.findMatchingNestedLevel();
+//     if (foundIndex !== -1) {
+//       this.updateListStackToLevel(foundIndex);
+//       this.createNewListItem(this.getCurrentList());
+//     } else {
+//       throw new Error("No matching spacing found for unordered list");
+//     }
+//   }
+
+//   isCurrentLevel() {
+//     return this.nestedSpaceCount === this.getCurrentSpacing();
+//   }
+
+//   isNestedLevel() {
+//     return this.nestedSpaceCount > this.getCurrentSpacing();
+//   }
+
+//   getCurrentList() {
+//     return this.listStack.at(-1).element;
+//   }
+
+//   getCurrentListItem() {
+//     return this.activeLI;
+//   }
+
+//   getCurrentSpacing() {
+//     return this.listStack.at(-1).spacing;
+//   }
+
+//   findMatchingNestedLevel() {
+//     for (let i = this.listStack.length - 1; i >= 0; i--) {
+//       if (this.listStack[i].spacing === this.nestedSpaceCount) {
+//         return i;
+//       }
+//     }
+//     return -1;
+//   }
+
+//   updateListStackToLevel(level) {
+//     this.listStack = this.listStack.slice(0, level + 1);
+//   }
+
+//   appendToParentOrNestedList(element) {
+//     const currentList = this.getCurrentList();
+//     if (currentList) {
+//       currentList.appendChild(element);
+//     } else {
+//       this.chatDivElement.appendChild(element);
+//     }
+//   }
+
+//   updateListStack(element) {
+//     this.listStack.push({
+//       element: element,
+//       spacing: this.nestedSpaceCount,
+//     });
+//   }
+
+//   createNewListItem(parentElement) {
+//     const liElement = this.document.createElement("li");
+//     this.activeLI = liElement;
+//     if (parentElement) {
+//       parentElement.appendChild(liElement);
+//     } else {
+//       throw new Error("No parent element provided for the new list item");
+//     }
+//   }
+
+//   isChunkNumber(chunk) {
+//     return !isNaN(parseInt(chunk)) && parseInt(chunk).toString() === chunk;
+//   }
+// }
+
+// export { ListHandler };
 import { EmphasisHandler } from "./emphasisHandler.js";
 class ListHandler {
   constructor(document, chatDivElement, doneCallback, mainStack) {
@@ -38,7 +332,6 @@ class ListHandler {
   }
 
   handle(chunk) {
-    console.log("chunk from main: ", chunk);
     if (this.newList.test(chunk)) {
       this.nestedSpaceCount = null;
       this.activeLI = null;
@@ -70,13 +363,10 @@ class ListHandler {
       return;
     }
     if (this.emphasisHandlerActive) {
-      console.log("emphasis active");
       this.emphasis.handle(chunk);
       return;
     } else {
       if (this.emphasis.matches(chunk)) {
-        console.log("emphasis handling initial trigger");
-        console.log("active li?", this.activeLI);
         this.emphasisHandlerActive = true;
         this.emphasis.handle(chunk);
         return;
@@ -101,22 +391,8 @@ class ListHandler {
         } else {
           console.log("ERROR awaiting dot but chunk isn't dot!", chunk);
         }
-        // if (this.activeLI) {
-        //   this.activeLI.innerHTML += chunk;
-        //   this.awaitingDot = false;
-        // } else {
-        //   this.mainStack.at(-2).innerHtml += chunk;
-        //   this.awaitingDot = false;
-        // }
       }
     } else {
-      //Chunk before is not a number awaiting current chunk for a dot
-      // if (this.newList.test(chunk)) {
-      //   console.log("NEW LIST NEW LIST");
-      //   this.nestedSpaceCount = null;
-      //   this.activeLI = null;
-      //   return;
-      // }
       if (this.activeLI) {
         this.activeLI.innerHTML += chunk;
       } else if (this.isChunkNumber(chunk)) {
@@ -124,13 +400,11 @@ class ListHandler {
         this.numberBufferAwaitingDot = chunk;
         return;
       } else if (this.ulRegex.test(chunk)) {
-        console.log("handling ul", chunk);
         this.handleUL(chunk);
       }
     }
   }
   handleOL() {
-    console.log("OL space count: ", this.nestedSpaceCount);
     if (this.numberBufferAwaitingDot == "1") {
       const olElement = this.document.createElement("ol");
 
@@ -174,11 +448,9 @@ class ListHandler {
       }
     }
     let stackSample = this.listStack;
-    console.log("stack", stackSample);
   }
   handleUL(chunk) {
     //Either ul is first or nested, indicated by if statement below
-    console.log("UL space count: ", this.nestedSpaceCount);
     if (this.listStack.at(-1).element.tagName == "DUMMY") {
       //Create new UL and push to chatdivelement, as it's the first item of the list
       const ulElement = this.document.createElement("ul");
@@ -194,7 +466,6 @@ class ListHandler {
     } else {
       //Check the nestedspace count to determine if we're below, at, or above the current hierachy level
       if (this.nestedSpaceCount == null) {
-        console.log("HERE");
         const liElement = this.document.createElement("li");
         this.activeLI = liElement;
         this.listStack.at(-1).element.appendChild(liElement);
@@ -235,7 +506,6 @@ class ListHandler {
           console.log("Error handling UL!");
         }
       }
-      console.log("stack called from ul", this.listStack);
     }
 
     // else {
@@ -250,7 +520,6 @@ class ListHandler {
     return !isNaN(parseInt(chunk)) && parseInt(chunk).toString() === chunk;
   }
   deactivateEmphasisHandler() {
-    console.log("DEACTIVE EMPHASIS HANDLER CALLBACK");
     this.emphasisHandlerActive = false;
   }
 }
